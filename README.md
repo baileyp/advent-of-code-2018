@@ -33,6 +33,12 @@ Or you can run it with input directly as an argument
 $ python -m aoc 1 1 abcdefg
 ```
 
+## Notes
+
+Within the comments of each file I'll be capturing some very simple notes about the algorithm and space/time complexity.
+In any notes that reference Big O notation, `n` will always refer to the number of lines or items in the puzzle input,
+unless otherwise noted.
+
 ## Testing
 
 There are both unit tests and integration tests, all of which requre `pytest`. 
