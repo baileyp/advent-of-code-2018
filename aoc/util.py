@@ -5,6 +5,9 @@ class FileReader:
     def __iter__(self):
         return map(lambda x: x.strip(), iter(self._file))
 
+    def single_line(self):
+        return next(iter(self))
+
     def iter_circular(self):
         """
         Python doesn't support resetting iterators so this loads the file data into memory so the looping can be

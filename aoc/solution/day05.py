@@ -4,7 +4,7 @@ def part1(file):
     :param file:
     :return:
     """
-    polymer = list(file).pop()
+    polymer = file.single_line()
 
     return len(react(polymer))
 
@@ -15,7 +15,7 @@ def part2(file):
     :param file:
     :return:
     """
-    polymer = list(file).pop()
+    polymer = file.single_line()
     length = len(polymer)
     for i in range(65, 91):
         reacted = react(polymer.replace(chr(i), '').replace(chr(i + 32), ''))

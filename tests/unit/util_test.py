@@ -26,3 +26,7 @@ class TestFileReader:
             counter += 1
 
         assert seen.count(lines[0]) == expected
+
+    def test_single_line(self):
+        reader = FileReader(['\tSingle Line   '])
+        assert reader.single_line() == 'Single Line'

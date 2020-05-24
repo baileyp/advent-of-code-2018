@@ -20,7 +20,7 @@ def part2(file):
 
 
 def build_graph(file):
-    license_file = deque(int(n) for n in next(iter(file)).split(' '))
+    license_file = deque(int(n) for n in file.single_line().split(' '))
     return parse_license(license_file, Node())
 
 
