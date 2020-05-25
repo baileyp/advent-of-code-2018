@@ -15,8 +15,7 @@ def part1(file, run_interactive=True, num_moves=0):
     elapsed = 0
 
     if run_interactive:
-        # First, move all the points until they coalesce a grid no wider than 80. This was a bit of a guess but I
-        # figured the final output would print within a standard terminal
+        # First, move all the points until they coalesce a grid no wider than 80.
         while True:
             min_x, max_x, *_ = size(sky)
             if max_x - min_x < 80:
