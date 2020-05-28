@@ -1,16 +1,15 @@
+import itertools
+import operator
+
+
 def part1(file):
     """
     O(n^2) time and space where n is the size of the grid
     :param file:
     :return:
     """
-    serial_number = int(file.single_line())
-    grid = []
     # Populate a 300x300 grid with power level values
-    for y in range(300):
-        grid.append([])
-        for x in range(300):
-            grid[y].append(power_level(x, y, serial_number))
+    grid = build_grid(int(file.single_line()))
 
     # Find the most powerful 3x3 square
     most_powerful = (None, 0)
@@ -29,20 +28,12 @@ def part2(file):
     :param file:
     :return:
     """
-    serial_number = int(file.single_line())
-    grid = []
-    # Populate a 300x300 grid as a summed-area table of power level values
-    for y in range(300):
-        grid.append([])
-        for x in range(300):
-            square_power = power_level(x, y, serial_number)
-            if x > 0:
-                square_power += grid[y][x-1]
-            if y > 0:
-                square_power += grid[y-1][x]
-            if y > 0 and x > 0:
-                square_power -= grid[y-1][x-1]
-            grid[y].append(square_power)
+    # Populate a 300x300 grid with power level values
+    grid = build_grid(int(file.single_line()))
+
+    # Rotate and accumulate values twice, converting to summed-area table
+    grid = [list(itertools.accumulate(iter(row[col] for row in grid), operator.add)) for col in range(300)]
+    grid = [list(itertools.accumulate(iter(row[col] for row in grid), operator.add)) for col in range(300)]
 
     most_powerful = (None, 0, 0)
     for y in range(300):
@@ -66,6 +57,16 @@ def part2(file):
                     most_powerful = (x, y), square_power, size
 
     return f"{most_powerful[0][0]},{most_powerful[0][1]},{most_powerful[2]}"
+
+
+def build_grid(serial_number, size=300):
+    grid = []
+    for y in range(size):
+        grid.append([])
+        for x in range(size):
+            grid[y].append(power_level(x, y, serial_number))
+
+    return grid
 
 
 def square(x, y, size=3):
